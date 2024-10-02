@@ -5,7 +5,7 @@ namespace microservfinanceiro.Financeiro.Entities
     public class Debitos
     {
         public Guid Id { get; set; }
-        public double Valor { get; set; }
+        public decimal Valor { get; set; }
         public DateTime DataVencimento { get; set; }
         public string TipoPagamento { get; set; }
         public decimal? Juros { get; set; }
@@ -14,7 +14,7 @@ namespace microservfinanceiro.Financeiro.Entities
 
         public Debitos() { }
 
-        public Debitos(Guid id, double valor, DateTime dataVencimento, string tipoPagamento, decimal? juros, decimal mensalidade, StatusPagamentoEnum statusPagamento)
+        public Debitos(Guid id, decimal valor, DateTime dataVencimento, string tipoPagamento, decimal? juros, decimal mensalidade, StatusPagamentoEnum statusPagamento)
         {
             Id = id;
             Valor = valor;
