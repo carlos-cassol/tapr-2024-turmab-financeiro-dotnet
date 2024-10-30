@@ -13,6 +13,7 @@ public class RepositoryDbContext : DbContext
 {
     private IConfiguration _configuration;
     public DbSet<Bolsas> Bolsas {get;set;}
+    public DbSet<Debitos> Debitos {get;set;}
 
     public RepositoryDbContext(IConfiguration configuration){
         this._configuration = configuration;
@@ -36,6 +37,20 @@ public class RepositoryDbContext : DbContext
         modelBuilder.Entity<Bolsas>()
             .HasPartitionKey(p => p.Id);
 
+            modelBuilder.Entity<Debitos>()
+            .HasNoDiscriminator();
+        modelBuilder.Entity<Debitos>()
+            .ToContainer("Debitos");
+        modelBuilder.Entity<Debitos>()
+            .Property(p => p.Id)
+            .HasValueGenerator<GuidValueGenerator>();
+        modelBuilder.Entity<Debitos>()
+            .HasPartitionKey(p => p.Id);
+
+
     }
+
+
+
 
 }

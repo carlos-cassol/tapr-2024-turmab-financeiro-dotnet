@@ -8,10 +8,7 @@ namespace Services
 {
     public interface IDebitoService
     {
-        public List<Debitos> GetAll();
-        public Debitos Get();
-        Task<object?> GetAllAsync();
-        Task<object?> SaveAsync(Debitos bolsas);
-        Task<object?> SaveAsync(object debito);
+        public Task<List<Debitos>> GetAllAsync();
+        public Task<Debitos> SaveAsync(Debitos debito);
     }
 }

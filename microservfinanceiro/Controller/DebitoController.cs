@@ -10,7 +10,6 @@ namespace microservfinanceiro.Controller
     public class DebitoController : ControllerBase
     {
         private IDebitoService _service;
-        private object debito;
 
         public DebitoController(IDebitoService service){
             this._service = service;
