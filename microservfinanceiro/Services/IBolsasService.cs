@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using microservfinanceiro.Financeiro.Entities;
 
 namespace Services
 {
     public interface IBolsasService
     {
-        public List<Bolsas> GetAll();
-        public Bolsas Get();
+        public Task<List<Bolsas>> GetAllAsync();
+        public Task<Bolsas> SaveAsync(Bolsas bolsa);
     }
 }
