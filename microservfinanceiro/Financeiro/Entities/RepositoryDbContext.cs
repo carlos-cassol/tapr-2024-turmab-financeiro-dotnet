@@ -12,15 +12,15 @@ namespace microservcolegio.Secretaria.Entities;
 public class RepositoryDbContext : DbContext
 {
     private IConfiguration _configuration;
-    private DbSet<Bolsas> Bolsas {get;set;}
+    public DbSet<Bolsas> Bolsas {get;set;}
 
     public RepositoryDbContext(IConfiguration configuration){
         this._configuration = configuration;
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
         optionsBuilder.UseCosmos(
-            connectionString: this._configuration["CosmosDBURL"],
-            databaseName: this._configuration["CosmosDBDBName"]
+            connectionString: this._configuration["CosmosDBURL"]!,
+            databaseName: this._configuration["CosmosDBDBName"]!
         );
     }
 
