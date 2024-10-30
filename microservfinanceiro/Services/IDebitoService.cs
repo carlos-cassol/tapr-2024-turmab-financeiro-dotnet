@@ -11,6 +11,7 @@ namespace Services
         public List<Debitos> GetAll();
         public Debitos Get();
         Task<object?> GetAllAsync();
-        Task<object?> SaveAsync(Debitos aluno);
+        Task<object?> SaveAsync(Debitos bolsas);
+        Task<object?> SaveAsync(object debito);
     }
 }

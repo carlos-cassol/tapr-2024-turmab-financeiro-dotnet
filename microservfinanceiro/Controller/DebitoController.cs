@@ -10,6 +10,7 @@ namespace microservfinanceiro.Controller
     public class DebitoController : ControllerBase
     {
         private IDebitoService _service;
+        private object debito;
 
         public DebitoController(IDebitoService service){
             this._service = service;
@@ -20,14 +21,14 @@ namespace microservfinanceiro.Controller
             return Results.Ok(listaDebito);
         }
         [HttpPost]
-        public async Task<IResult> Post(Debitos aluno){
-            if(aluno == null){
+        public async Task<IResult> Post(Debitos debito){
+            if(debito == null){
                 return Results.BadRequest();
             }
 
-            var alunoSalvo = await _service.SaveAsync(aluno);
+            var debitoSalvo = await _service.SaveAsync(debito);
 
-            return Results.Ok(alunoSalvo);
+            return Results.Ok(debitoSalvo);
         }
     
     
