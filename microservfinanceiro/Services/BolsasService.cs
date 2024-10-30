@@ -7,6 +7,6 @@ namespace Services
 {
     public class BolsasService : IBolsasService
     {
-        
+        private RepositoryDbCOntext _dbContext;
     }
 }
