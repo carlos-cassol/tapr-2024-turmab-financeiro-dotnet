@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using microservfinanceiro.Financeiro.Entities;
 using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
@@ -11,17 +7,29 @@ namespace microservcolegio.Secretaria.Entities;
 
 public class RepositoryDbContext : DbContext
 {
-    private IConfiguration _configuration;
+    private readonly IConfiguration _configuration;
     public DbSet<Bolsas> Bolsas {get;set;}
+
     public DbSet<Debitos> Debitos {get;set;}
+
+    public DbSet<Emissoes> Emissoes {get;set;}
 
     public RepositoryDbContext(IConfiguration configuration){
         this._configuration = configuration;
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
-        optionsBuilder.UseCosmos(
-            connectionString: this._configuration["CosmosDBURL"]!,
-            databaseName: this._configuration["CosmosDBDBName"]!
+    optionsBuilder.UseCosmos(
+                connectionString: this._configuration["CosmosDBURL"]!,
+                databaseName: this._configuration["CosmosDBDBName"]!,
+                cosmosOptionsAction: options =>
+                {
+                    options.ConnectionMode(ConnectionMode.Gateway);
+                    options.HttpClientFactory(() => new HttpClient(new HttpClientHandler()
+                    {
+                        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                    }));
+                }
+
         );
     }
 
@@ -45,6 +53,16 @@ public class RepositoryDbContext : DbContext
             .Property(p => p.Id)
             .HasValueGenerator<GuidValueGenerator>();
         modelBuilder.Entity<Debitos>()
+            .HasPartitionKey(p => p.Id);
+            
+          modelBuilder.Entity<Emissoes>()
+            .HasNoDiscriminator();
+        modelBuilder.Entity<Emissoes>()
+            .ToContainer("Emissoes");
+        modelBuilder.Entity<Emissoes>()
+            .Property(p => p.Id)
+            .HasValueGenerator<GuidValueGenerator>();
+        modelBuilder.Entity<Emissoes>()
             .HasPartitionKey(p => p.Id);
 
 
