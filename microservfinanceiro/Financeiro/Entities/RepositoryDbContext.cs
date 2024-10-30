@@ -9,6 +9,9 @@ public class RepositoryDbContext : DbContext
 {
     private readonly IConfiguration _configuration;
     public DbSet<Bolsas> Bolsas {get;set;}
+
+    public DbSet<Debitos> Debitos {get;set;}
+
     public DbSet<Emissoes> Emissoes {get;set;}
 
     public RepositoryDbContext(IConfiguration configuration){
@@ -42,6 +45,30 @@ public class RepositoryDbContext : DbContext
         modelBuilder.Entity<Bolsas>()
             .HasPartitionKey(p => p.Id);
 
+            modelBuilder.Entity<Debitos>()
+            .HasNoDiscriminator();
+        modelBuilder.Entity<Debitos>()
+            .ToContainer("Debitos");
+        modelBuilder.Entity<Debitos>()
+            .Property(p => p.Id)
+            .HasValueGenerator<GuidValueGenerator>();
+        modelBuilder.Entity<Debitos>()
+            .HasPartitionKey(p => p.Id);
+            
+          modelBuilder.Entity<Emissoes>()
+            .HasNoDiscriminator();
+        modelBuilder.Entity<Emissoes>()
+            .ToContainer("Emissoes");
+        modelBuilder.Entity<Emissoes>()
+            .Property(p => p.Id)
+            .HasValueGenerator<GuidValueGenerator>();
+        modelBuilder.Entity<Emissoes>()
+            .HasPartitionKey(p => p.Id);
+
+
     }
+
+
+
 
 }
