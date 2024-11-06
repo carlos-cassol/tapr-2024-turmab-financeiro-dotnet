@@ -18,10 +18,20 @@ public class RepositoryDbContext : DbContext
     public RepositoryDbContext(IConfiguration configuration){
         this._configuration = configuration;
     }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
+      protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
+
         optionsBuilder.UseCosmos(
-            connectionString: this._configuration["CosmosDBURL"]!,
-            databaseName: this._configuration["CosmosDBDBName"]!
+            connectionString: this._configuration["CosmosDBURL"],
+            databaseName: this._configuration["CosmosDBDBName"],
+            cosmosOptionsAction: options =>
+            {
+                options.ConnectionMode(ConnectionMode.Gateway);
+                options.HttpClientFactory(() => new HttpClient(new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                }));
+            }
+
         );
     }
 
