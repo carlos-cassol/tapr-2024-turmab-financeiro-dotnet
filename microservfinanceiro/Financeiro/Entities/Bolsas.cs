@@ -24,5 +24,6 @@ namespace microservfinanceiro.Financeiro.Entities
             DataAplicacao = dataAplicacao;
             Disponibilidade = disponibilidade;
         }
+        
     }
 }

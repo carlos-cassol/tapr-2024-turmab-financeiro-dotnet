@@ -1,0 +1,13 @@
+### Buscar todos os alunos
+GET http://localhost:5011/api/v1/aluno
+
+### Inserir um aluno
+POST http://localhost:5011/api/v1/aluno
+Content-Type: application/json
+
+{
+    "nome" : "zezinho"
+}
+
+### Buscar todos os alunos
+GET https://www.univille.br
