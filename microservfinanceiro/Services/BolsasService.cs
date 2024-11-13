@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using microservcolegio.Secretaria.Entities;
 using microservfinanceiro.Financeiro.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services
 {
@@ -24,6 +25,31 @@ namespace Services
             await _dbContext.SaveChangesAsync();
 
             return bolsa;
+        }
+
+        public async Task<Bolsas> UpdateAsync(Guid Id, Bolsas bolsa)
+        {
+            Guid oldId = Guid.Empty;
+            var dbBolsa = await _dbContext.Bolsas.Where(b => b.Id == bolsa.Id).FirstOrDefaultAsync();
+            if(dbBolsa is not null){
+                dbBolsa = bolsa;
+                dbBolsa.Id = oldId;
+                await _dbContext.SaveChangesAsync();
+                return dbBolsa;
+            }
+            return null;
+
+        }
+
+        public async Task<Bolsas> DeleteAsync(Guid Id){
+            Guid oldId = Guid.Empty;
+            var dbBolsa = await _dbContext.Bolsas.Where(b => b.Id == Id).FirstOrDefaultAsync();
+                if(dbBolsa is not null){
+                    _dbContext.Remove(dbBolsa);
+                    await _dbContext.SaveChangesAsync();
+                    return dbBolsa;
+                }
+            return null;
         }
     }
 }

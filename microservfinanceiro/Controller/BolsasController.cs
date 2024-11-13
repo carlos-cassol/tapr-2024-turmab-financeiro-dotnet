@@ -29,7 +29,17 @@ namespace microservfinanceiro.Controller
 
             return Results.Ok(alunoSalvo);
         }
-    
+        [HttpPut("{id}")]
+        public async Task<IResult> Put(Guid id, [FromBody] Bolsas bolsa) {
+            if(bolsa is null || id == Guid.Empty)
+                return Results.BadRequest();
+
+            bolsa = await _service.UpdateAsync(id, bolsa);
+            if(bolsa is null)
+                return Results.NotFound();
+
+            return Results.Ok(bolsa);
+        }
     
     }
 }

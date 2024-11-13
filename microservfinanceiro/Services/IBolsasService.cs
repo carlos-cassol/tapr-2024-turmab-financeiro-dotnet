@@ -10,5 +10,8 @@ namespace Services
     {
         public Task<List<Bolsas>> GetAllAsync();
         public Task<Bolsas> SaveAsync(Bolsas bolsa);
+
+        public Task<Bolsas> UpdateAsync(Guid Id, Bolsas bolsas);
+        public Task<Bolsas> DeleteAsync(Guid Id);
     }
 }
