@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("microservfinanceiro")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25cf192c5003bf98cd1912668d3c9294b2978e6a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+292ccd7dedb00ccc5ac24e8c788074a684d860dd")]
 [assembly: System.Reflection.AssemblyProductAttribute("microservfinanceiro")]
 [assembly: System.Reflection.AssemblyTitleAttribute("microservfinanceiro")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
